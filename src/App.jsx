@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className="container mx-auto mt-8">
-        <h1 className="text-3x1 md:text-4xl lg:text-5xl font-bold mb-20">
+        <h1 className="text-3x1 md:text-4xl lg:text-5xl font-bold mb-16">
           Astronomy Picture of the Day
         </h1>
         <GaleryComponent />
