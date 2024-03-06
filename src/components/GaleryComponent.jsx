@@ -7,14 +7,14 @@ const countData = "3";
 const GaleryComponent = () => {
   const [square, setSquare] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();  
+  const [error, setError] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `${baseURL}?api_key=${apiKey}&count=${countData}`          
+          `${baseURL}?api_key=${apiKey}&count=${countData}`
         );
         const data = await response.json();
         setSquare(data);
@@ -28,9 +28,11 @@ const GaleryComponent = () => {
     fetchData();
   }, []);
 
+  const [showInfo, setShowInfo] = useState(Array(3).fill(false));
   const handleMoreInfo = (index) => {
-    // Lógica para mostrar más información del elemento en el índice especificado
-    console.log("Mostrar más información para el índice", index);
+    const newShowInfo = [...showInfo];
+    newShowInfo[index] = !newShowInfo[index];
+    setShowInfo(newShowInfo);
   };
 
   const handleLike = (index) => {
@@ -39,15 +41,20 @@ const GaleryComponent = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><h2>Loading...</h2></div>;
   }
   if (error) {
-    return <div>Something went wrong! Please try again.</div>;
+    return <div><h2>Something went wrong! Please try again.</h2></div>;
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
       {square.map((square, index) => (
-        <div key={index} className="bg-gray-200 p-4 rounded-lg flex flex-col h-auto">
+        <div
+          key={index}
+          className={`bg-gray-200 p-4 rounded-lg flex flex-col h-auto mb-5 relative ${
+            showInfo[index] ? "z-10" : ""
+          }`}
+        >
           <img
             src={square.url}
             alt={square.title}
@@ -69,6 +76,21 @@ const GaleryComponent = () => {
             >
               Like
             </button>
+          </div>
+          <div
+            className={`bg-gray-200 p-4 rounded-md flex flex-col absolute top-0 left-0 w-full h-max z-0 transition-opacity ${
+              showInfo[index] ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <p>{square.explanation}</p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => handleMoreInfo(index)}
+                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 mt-5 rounded w-28"
+              >
+                Back
+              </button>
+            </div>
           </div>
         </div>
       ))}
