@@ -8,7 +8,7 @@ const CardComponent = ({
   return (
     <div
       key={index}
-      className={`bg-gray-200 p-4 rounded-lg flex flex-col h-auto relative ${
+      className={`bg-gray-200 p-4 rounded-lg flex flex-col h-auto ${
         showInfo[index] ? "" : "z-1"
       }`}
     >
