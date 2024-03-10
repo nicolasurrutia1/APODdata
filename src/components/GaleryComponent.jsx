@@ -3,7 +3,7 @@ import CardComponent from "./CardComponent";
 import InfoComponent from "./InfoComponent";
 
 const baseURL = "https://api.nasa.gov/planetary/apod";
-const apiKey = "jdPeHOSxoEVRlqk0ktYyRV3DEmwedzDA4caJmMta";
+const apiKey = process.env.REACT_APP_API_KEY
 const countData = "3";
 
 const GaleryComponent = () => {
