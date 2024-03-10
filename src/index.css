@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.flip{
-  transform: rotateY(180deg);
-  transition: transform 0.5 ease-in-out
-}
-
 /* @layer components {
   .default {
     @apply transition-transform ease-in-out rotate-180;
