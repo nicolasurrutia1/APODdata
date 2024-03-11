@@ -3,7 +3,7 @@ import CardComponent from "./CardComponent";
 import InfoComponent from "./InfoComponent";
 
 const baseURL = "https://api.nasa.gov/planetary/apod";
-const apiKey = import.meta.env.VITE_REACT_APP_API_KEY
+const apiKey = import.meta.env.VITE_API_KEY
 const countData = "3";
 
 const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
@@ -25,8 +25,8 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
         const newData = await response.json();
         setData(newData);
         setHasDataLoaded(true);
-      } catch (error) {
-        setError(error);
+      } catch (e) {
+        setError(e);
       } finally {
         setIsLoading(false);
       }
