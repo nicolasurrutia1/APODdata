@@ -36,7 +36,7 @@ function App() {
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-16">
           Astronomy Picture of the Day
         </h1>
-        <div className="flex">
+        <div className="flex mt-5">
           {tabButtons.map((tabButton)=>(
             <TabButton  
             key={tabButton.value}
