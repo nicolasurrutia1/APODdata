@@ -1,44 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import CardComponent from "./CardComponent";
 import InfoComponent from "./InfoComponent";
 import { useDataContext } from "../context/dataContext";
 
-// const baseURL = "https://api.nasa.gov/planetary/apod";
-// const apiKey = import.meta.env.VITE_API_KEY
-// const countData = "3";
-
 const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
-  // const [data, setData] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState();
   const [showInfo, setShowInfo] = useState(Array(3).fill(false));
-  // const [reloadData, setReloadData] = useState(false);
-  // const [hasDataLoaded, setHasDataLoaded] = useState(false);
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await fetch(
-  //         `${baseURL}?api_key=${apiKey}&count=${countData}`
-  //       );
-  //       const newData = await response.json();
-  //       setData(newData);
-  //       setHasDataLoaded(true);
-  //     } catch (e) {
-  //       setError(e);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   } 
-  //   if (!hasDataLoaded && (reloadData || data.length === 0)) {
-  //     fetchData();
-  //     setReloadData(false);
-  //   }
-  // }, [reloadData, data, hasDataLoaded]);
-
-  const { data, loading, error } = useDataContext();
+  
+  const { data, loading, error, reloadData } = useDataContext();
   const memoizedData = useMemo(() => data, [data]);
 
   const handleMoreInfo = (index) => {
@@ -49,12 +17,12 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
 
   const handleLike = (index) => {
     const likedPhoto = memoizedData[index];
-    setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);    
+    setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);
     // console.log(`Dar me gusta al elemento en el índice ${index} ${likedPhoto}` );
   };
 
   const handleReloadData = () => {
-    setReloadData(true);
+    reloadData();
   };
 
   if (loading) {
@@ -70,7 +38,7 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
         <h2>Something went wrong! Please try again.</h2>
       </div>
     );
-  }  
+  }
   return (
     <section>
       <button
@@ -100,5 +68,5 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
       </div>
     </section>
   );
-}
+};
 export default GaleryComponent;
