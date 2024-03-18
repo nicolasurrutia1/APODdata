@@ -11,8 +11,7 @@ const GalleryItem = ({ index }) => {
         data={item}
         index={index}
         showInfo={showInfo}
-        handleMoreInfo={handleMoreInfo}
-        // handleLike={handleLike}
+        handleMoreInfo={handleMoreInfo}        
       />
       <InfoComponent
         data={item}

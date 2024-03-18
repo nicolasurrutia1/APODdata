@@ -1,25 +1,11 @@
 import React, { useState, useMemo } from "react";
-import CardComponent from "./CardComponent";
-import InfoComponent from "./InfoComponent";
+// import CardComponent from "./CardComponent";
+// import InfoComponent from "./InfoComponent";
 import { useDataContext } from "../context/dataContext";
 import GalleryGrid from "./GalleryGrid";
 
-const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
-  const [showInfo, setShowInfo] = useState(Array(3).fill(false));
-
-  const { data, loading, error, reloadData } = useDataContext();
-  const memoizedData = useMemo(() => data, [data]);
-
-  const handleMoreInfo = (index) => {
-    const newShowInfo = [...showInfo];
-    newShowInfo[index] = !newShowInfo[index];
-    setShowInfo(newShowInfo);
-  };
-
-  const handleLike = (index) => {
-    const likedPhoto = memoizedData[index];
-    setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);    
-  };
+const GaleryComponent = () => {  
+  const { loading, error, reloadData } = useDataContext();
 
   const handleReloadData = () => {
     reloadData();
@@ -48,25 +34,6 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
         Explore
       </button>
       <GalleryGrid />
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-        {memoizedData.map((data, index) => (
-          <div key={index} className={`relative`}>
-            <CardComponent
-              data={data}
-              index={index}
-              showInfo={showInfo}
-              handleMoreInfo={handleMoreInfo}
-              handleLike={handleLike}
-            ></CardComponent>
-            <InfoComponent
-              data={data}
-              index={index}
-              showInfo={showInfo}
-              handleMoreInfo={handleMoreInfo}
-            />
-          </div>
-        ))}
-      </div> */}
     </section>
   );
 };

@@ -28,15 +28,15 @@ export const DataProvider = ({ children }) => {
     });
   };
 
-  const handleLike = (index) => {
-    // const likedPhoto = memoizedData[index];
-    // setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);
-    console.log(`Dar me gusta al elemento en el índice ${index}`);
-  };
+  // const handleLike = (index) => {
+  //   const likedPhoto = memoizedData[index];
+  //   setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);
+  //   console.log(`Dar me gusta al elemento en el índice ${index}`);
+  // };
 
 
   return (
-    <DataContext.Provider value={{ data, loading, error, reloadData, showInfo, handleMoreInfo, }}>
+    <DataContext.Provider value={{ data, loading, error, reloadData, showInfo, handleMoreInfo }}>
       {children}
     </DataContext.Provider>
   );

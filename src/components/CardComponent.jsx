@@ -1,11 +1,16 @@
 import Photo from "./Photo";
+import { useLikeContext } from "../context/likeContext";
 const CardComponent = ({
   data,
   index,
   showInfo,
-  handleMoreInfo,
-  handleLike,
+  handleMoreInfo  
 }) => {
+  const { addLikedPhoto } = useLikeContext(); 
+  const handleLike = () => {
+    addLikedPhoto(data);
+  };
+
   return (
     <div
       key={index}
@@ -27,7 +32,7 @@ const CardComponent = ({
           Info
         </button>
         <button
-          onClick={() => handleLike(index)}
+          onClick={() => handleLike()}
           className="bg-red-600 hover:bg-red-500 text-white px-4 py-3 rounded w-28"
         >
           Like
