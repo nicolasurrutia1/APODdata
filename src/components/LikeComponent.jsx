@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 const LikeComponent = ({ likedPhotos }) => { 
   const uniqueLikedPhotos = likedPhotos.filter((photo, index) => {
     return likedPhotos.findIndex((p) => p.url === photo.url) === index;
@@ -5,7 +6,7 @@ const LikeComponent = ({ likedPhotos }) => {
   
   if(uniqueLikedPhotos.length === 0){
     return(
-      <div className="mt-5">
+      <div className="mt-10">
         <h2>Save your pictures here</h2>
       </div>
     )
@@ -17,11 +18,9 @@ const LikeComponent = ({ likedPhotos }) => {
           key={index}
           className="bg-gray-200 p-4 rounded-lg flex flex-col h-auto relative"
         >
-          <img
+          <Photo
             src={likedPhoto.url}
-            alt={likedPhoto.title}
-            loading="lazy"
-            className="mb-3 object-cover w-full max-h-56"
+            alt={likedPhoto.title}          
           />
           <h2 className="text-lg font-bold mb-3">{likedPhoto.title}</h2>
         </div>

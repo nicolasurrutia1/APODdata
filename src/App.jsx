@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 // import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
+
 import "./App.css";
 import GaleryComponent from "./components/GaleryComponent";
 import TabButton from "./components/TabButton";
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <>
-      <div className="container mx-auto mt-8">
+      <main className="container mx-auto mt-8">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-16">
           Astronomy Picture of the Day
         </h1>
@@ -50,7 +50,7 @@ function App() {
         activeTab={activeTab}
         views={tabViews}
         />
-      </div>
+      </main>
     </>
   );
 }

@@ -2,10 +2,11 @@ import React, { useState, useMemo } from "react";
 import CardComponent from "./CardComponent";
 import InfoComponent from "./InfoComponent";
 import { useDataContext } from "../context/dataContext";
+import GalleryGrid from "./GalleryGrid";
 
 const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
   const [showInfo, setShowInfo] = useState(Array(3).fill(false));
-  
+
   const { data, loading, error, reloadData } = useDataContext();
   const memoizedData = useMemo(() => data, [data]);
 
@@ -17,8 +18,7 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
 
   const handleLike = (index) => {
     const likedPhoto = memoizedData[index];
-    setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);
-    // console.log(`Dar me gusta al elemento en el índice ${index} ${likedPhoto}` );
+    setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);    
   };
 
   const handleReloadData = () => {
@@ -47,7 +47,8 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
       >
         Explore
       </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+      <GalleryGrid />
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {memoizedData.map((data, index) => (
           <div key={index} className={`relative`}>
             <CardComponent
@@ -65,7 +66,7 @@ const GaleryComponent = ({ likedPhotos, setLikedPhotos }) => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
     </section>
   );
 };

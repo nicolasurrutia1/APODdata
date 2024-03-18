@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 const CardComponent = ({
   data,
   index,
@@ -12,11 +13,9 @@ const CardComponent = ({
         showInfo[index] ? "" : "z-1"
       }`}
     >
-      <img
+      <Photo
         src={data.url}
         alt={data.title}
-        loading="lazy"
-        className="mb-3 object-cover w-full max-h-56"
       />
       <h2 className="text-lg font-bold mb-3">{data.title}</h2>
       <p className="text-sm text-gray-500 mb-10">{data.date}</p>

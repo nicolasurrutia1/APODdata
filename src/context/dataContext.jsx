@@ -18,8 +18,25 @@ export const DataProvider = ({ children }) => {
     setReloadTrigger(prev => prev + 1);
   }
 
+  const [showInfo, setShowInfo] = useState(Array(3).fill(false));
+
+  const handleMoreInfo = (index) => {
+    setShowInfo(prev => {
+      const newShowInfo = [...prev];
+      newShowInfo[index] = !newShowInfo[index];
+      return newShowInfo;
+    });
+  };
+
+  const handleLike = (index) => {
+    // const likedPhoto = memoizedData[index];
+    // setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, likedPhoto]);
+    console.log(`Dar me gusta al elemento en el índice ${index}`);
+  };
+
+
   return (
-    <DataContext.Provider value={{ data, loading, error, reloadData }}>
+    <DataContext.Provider value={{ data, loading, error, reloadData, showInfo, handleMoreInfo, }}>
       {children}
     </DataContext.Provider>
   );
