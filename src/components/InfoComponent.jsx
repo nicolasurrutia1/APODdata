@@ -9,7 +9,7 @@ const InfoComponent = ({ data, index, showInfo, handleMoreInfo }) => {
       <div className="flex justify-end">
         <button
           onClick={() => handleMoreInfo(index)}
-          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 mt-5 rounded w-28"
+          className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mt-5 rounded w-28"
         >
           Back
         </button>

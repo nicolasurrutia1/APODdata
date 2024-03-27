@@ -29,7 +29,7 @@ const GaleryComponent = () => {
     <section>
       <button
         onClick={handleReloadData}
-        className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold px-4 py-3 mr-5 rounded w-28 mb-10"
+        className="bg-blue-900 hover:bg-blue-950 text-white font-semibold px-4 py-3 mr-5 rounded w-28 mb-10"
       >
         Explore
       </button>

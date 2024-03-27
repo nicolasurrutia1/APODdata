@@ -27,13 +27,13 @@ const CardComponent = ({
       <div className="mt-auto flex justify-end">
         <button
           onClick={() => handleMoreInfo(index)}
-          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 mr-5 rounded w-28"
+          className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mr-5 rounded w-28"
         >
           Info
         </button>
         <button
           onClick={() => handleLike()}
-          className="bg-red-600 hover:bg-red-500 text-white px-4 py-3 rounded w-28"
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded w-28"
         >
           Like
         </button>
