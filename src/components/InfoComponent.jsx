@@ -1,18 +1,35 @@
-const InfoComponent = ({ data, index, showInfo, handleMoreInfo }) => {
+import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDataContext } from "../context/dataContext";
+
+const InfoComponent = ({}) => {
+  const indexNum = parseInt(useParams().index);
+  const { data } = useDataContext();
+
   return (
-    <div
-      className={`bg-gray-200 p-4 rounded-md flex flex-col absolute top-0 left-0 w-full h-max z-0 transition-opacity ${
-        showInfo[index] ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
-    >
-      <p className="text-base">{data.explanation}</p>
-      <div className="flex justify-end">
-        <button
-          onClick={() => handleMoreInfo(index)}
-          className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mt-5 rounded w-28"
-        >
-          Back
-        </button>
+    <div className="flex text-left  p-3 flex-col md:flex-row">
+      <div className="sm:w-full md:w-1/2 ">
+        <img
+          src={data[indexNum].url}
+          alt={data[indexNum].title}
+          className="max-w-full"
+        />
+      </div>
+      <div className="sm:w-full md:w-1/2 md:px-2 lg:px-5 ml-5 ">
+        <h3 className="text-xl font-bold mb-5">{data[indexNum].title}</h3>
+        <p className="text-base text-black mb-2">{data[indexNum].date}</p>
+        <p className="text-base text-black mb-5">{data[indexNum].copyright}</p>
+        <p className="text-base text-black mb-10 w-4/5">
+          {data[indexNum].explanation}
+        </p>
+        <div className="flex justify-center">
+          <NavLink
+            to={`/`}
+            className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3  rounded w-28 text-center"
+          >
+            Back
+          </NavLink>
+        </div>
       </div>
     </div>
   );
