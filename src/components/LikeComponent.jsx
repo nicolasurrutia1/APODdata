@@ -10,7 +10,7 @@ const LikeComponent = () => {
   if(uniqueLikedPhotos.length === 0){
     return(
       <div className="mt-10">
-        <h2>Save your pictures here</h2>
+        <h3 className="text-xl">Save your pictures here</h3>
       </div>
     )
   }

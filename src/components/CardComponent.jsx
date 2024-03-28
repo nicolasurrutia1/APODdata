@@ -22,7 +22,7 @@ const CardComponent = ({
         src={data.url}
         alt={data.title}
       />
-      <h2 className="text-lg font-bold mb-3">{data.title}</h2>
+      <h3 className="text-xl font-bold mb-3">{data.title}</h3>
       <p className="text-sm text-gray-500 mb-10">{data.date}</p>
       <div className="mt-auto flex justify-end">
         <button

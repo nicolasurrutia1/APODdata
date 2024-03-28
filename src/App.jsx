@@ -39,7 +39,7 @@ function App() {
   //   favorites: <LikeComponent />,
   // };
 
-  //TODO LOADER, WHEN PRESS LIKE EFFECT ,INFO COMPONENT, NAVBAR STICKY 
+  //TODO: LOADER, WHEN PRESS LIKE EFFECT ,INFO COMPONENT, NAVBAR STICKY 
 
   return (
     <LikeProvider>

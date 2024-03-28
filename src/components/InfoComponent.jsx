@@ -5,7 +5,7 @@ const InfoComponent = ({ data, index, showInfo, handleMoreInfo }) => {
         showInfo[index] ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
-      <p>{data.explanation}</p>
+      <p className="text-base">{data.explanation}</p>
       <div className="flex justify-end">
         <button
           onClick={() => handleMoreInfo(index)}
