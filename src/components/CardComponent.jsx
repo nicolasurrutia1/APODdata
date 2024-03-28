@@ -17,13 +17,14 @@ const CardComponent = ({ data, index }) => {
     }, 1500);
   };
 
+  console.log(data.thumbnail_url)
+
   return (
     <div
       key={index}
       className={`bg-gray-200 p-4 rounded-lg flex flex-col h-auto`}
     >
-      {/* thumbnail_url */}
-      <Photo src={data.url} alt={data.title} />
+      <Photo src={data.url} alt={data.title} thumb={data.thumbnail_url} />
       <h3 className="text-xl font-bold mb-3">{data.title}</h3>
       <p className="text-sm text-gray-500 mb-2">{data.date}</p>      
       <div className="mt-10 flex justify-end">

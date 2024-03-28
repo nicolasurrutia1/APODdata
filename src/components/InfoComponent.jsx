@@ -5,12 +5,17 @@ import { useDataContext } from "../context/dataContext";
 const InfoComponent = ({}) => {
   const indexNum = parseInt(useParams().index);
   const { data } = useDataContext();
+  let source = data[indexNum].url
+  let thumb = data[indexNum].thumbnail_url
+    if(thumb !==undefined){
+        source = thumb
+    }
 
   return (
     <div className="flex text-left  p-3 flex-col md:flex-row">
       <div className="sm:w-full md:w-1/2 ">
         <img
-          src={data[indexNum].url}
+          src={source}
           alt={data[indexNum].title}
           className="max-w-full"
         />

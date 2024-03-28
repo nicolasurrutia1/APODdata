@@ -23,7 +23,8 @@ const LikeComponent = () => {
         >
           <Photo
             src={likedPhoto.url}
-            alt={likedPhoto.title}          
+            alt={likedPhoto.title}
+            thumb={likedPhoto.thumbnail_url}          
           />
           <h2 className="text-lg font-bold mb-3">{likedPhoto.title}</h2>
         </div>

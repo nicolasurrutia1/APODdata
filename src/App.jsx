@@ -9,7 +9,7 @@ import InfoComponent from "./components/InfoComponent";
 import Navbar from "./components/Navbar";
 import { LikeProvider } from "./context/likeContext";
 
-//TODO: NAVBAR STICKY, clear favorites, delete one photo
+//TODO: NAVBAR STICKY, clear favorites, delete photo
 
 function App() {
   return (

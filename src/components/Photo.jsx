@@ -1,7 +1,11 @@
-const Photo = ({src, alt,})=>{
+const Photo = ({src, alt, thumb})=>{
+    let source = src
+    if(thumb !==undefined){
+        source = thumb
+    }
     return(
         <figure>
-            <img src={src} alt={alt} className="mb-3 object-cover w-full max-h-56"/>
+            <img src={source} alt={alt} className="mb-3 object-cover w-full max-h-56"/>
         </figure>
     )
 }
