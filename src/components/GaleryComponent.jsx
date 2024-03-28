@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from "react";
-// import CardComponent from "./CardComponent";
-// import InfoComponent from "./InfoComponent";
 import { useDataContext } from "../context/dataContext";
 import GalleryGrid from "./GalleryGrid";
+import LoadingComponent from "./LoadingComponent";
 
 const GaleryComponent = () => {  
   const { loading, error, reloadData } = useDataContext();
@@ -13,9 +12,7 @@ const GaleryComponent = () => {
 
   if (loading) {
     return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
+      <LoadingComponent />
     );
   }
   if (error) {

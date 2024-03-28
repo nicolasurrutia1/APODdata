@@ -10,37 +10,9 @@ import LikeComponent from "./components/LikeComponent";
 import Navbar from "./components/Navbar";
 import { LikeProvider } from "./context/likeContext";
 
+//TODO: LOADER ,INFO COMPONENT, NAVBAR STICKY, clear favorites, delete one photo
+
 function App() {
-  // const [activeTab, setActiveTab] = useState("discover");
-
-  // const handleTabChange = useCallback((tab) => {
-  //   setActiveTab(tab);
-  // }, []);
-
-  // const renderTabButtons = () => {
-  //   return tabButtons.map((tabButton) => (
-  //     <TabButton
-  //       key={tabButton.value}
-  //       label={tabButton.label}
-  //       value={tabButton.value}
-  //       active={activeTab === tabButton.value}
-  //       onClick={() => handleTabChange(tabButton.value)}
-  //     />
-  //   ));
-  // };
-
-  // const tabButtons = [
-  //   { label: "Discover", value: "discover" },
-  //   { label: "Favorites", value: "favorites" },
-  // ];
-
-  // const tabViews = {
-  //   discover: <GaleryComponent />,
-  //   favorites: <LikeComponent />,
-  // };
-
-  //TODO: LOADER ,INFO COMPONENT, NAVBAR STICKY, clear favorites, delete one photo
-
   return (
     <LikeProvider>
       <BrowserRouter>
@@ -49,8 +21,6 @@ function App() {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-16">
             Astronomy Picture of the Day
           </h1>
-          {/* <div className="flex mt-5">{renderTabButtons()}</div>
-          <TabView activeTab={activeTab} views={tabViews} /> */}
           <Routes>
             <Route path="/" element={<GaleryComponent />} />
             <Route path="/favorites" element={<LikeComponent />} />
