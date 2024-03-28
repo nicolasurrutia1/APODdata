@@ -1,14 +1,19 @@
 import Photo from "./Photo";
 import { useLikeContext } from "../context/likeContext";
-const CardComponent = ({
-  data,
-  index,
-  showInfo,
-  handleMoreInfo  
-}) => {
-  const { addLikedPhoto } = useLikeContext(); 
+import { useState } from "react";
+
+import LikeEffectComponent from "./LikeEffectComponent";
+
+const CardComponent = ({ data, index, showInfo, handleMoreInfo }) => {
+  const { addLikedPhoto } = useLikeContext();
+  const [showEffect, setShowEffect] = useState(false);
+
   const handleLike = () => {
     addLikedPhoto(data);
+    setShowEffect(true);
+    setTimeout(() => {
+      setShowEffect(false);
+    }, 1500);
   };
 
   return (
@@ -18,10 +23,7 @@ const CardComponent = ({
         showInfo[index] ? "" : "z-1"
       }`}
     >
-      <Photo
-        src={data.url}
-        alt={data.title}
-      />
+      <Photo src={data.url} alt={data.title} />
       <h3 className="text-xl font-bold mb-3">{data.title}</h3>
       <p className="text-sm text-gray-500 mb-10">{data.date}</p>
       <div className="mt-auto flex justify-end">
@@ -38,6 +40,7 @@ const CardComponent = ({
           Like
         </button>
       </div>
+      {showEffect && <LikeEffectComponent />}
     </div>
   );
 };
