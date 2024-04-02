@@ -9,14 +9,14 @@ import InfoComponent from "./components/InfoComponent";
 import Navbar from "./components/Navbar";
 import { LikeProvider } from "./context/likeContext";
 
-//TODO: NAVBAR STICKY, clear favorites, delete photo
+//TODO: clear favorites, delete photo
 
 function App() {
   return (
     <LikeProvider>
       <BrowserRouter>
         <Navbar />
-        <main className="container mx-auto my-8">
+        <main className="container mx-auto my-20">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10">
             Astronomy Picture of the Day
           </h1>

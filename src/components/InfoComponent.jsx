@@ -17,7 +17,7 @@ const InfoComponent = ({}) => {
         <img
           src={source}
           alt={data[indexNum].title}
-          className="max-w-full"
+          className="h-full w-full "
         />
       </div>
       <div className="sm:w-full md:w-1/2 md:px-2 lg:px-5 ml-5 ">

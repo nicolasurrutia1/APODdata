@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="bg-blue-900 p-4 ">
+    <header className="bg-blue-900 p-4 fixed w-full top-0 left-0">
       <nav className="container mx-auto flex justify-between items-center">
         <div>
           <h2 className="text-white text-2xl font-bold">APOD</h2>

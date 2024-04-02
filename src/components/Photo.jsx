@@ -5,7 +5,7 @@ const Photo = ({src, alt, thumb})=>{
     }
     return(
         <figure>
-            <img src={source} alt={alt} className="mb-3 object-cover w-full max-h-56"/>
+            <img src={source} alt={alt} className="mb-3 object-cover w-full h-full max-h-64"/>
         </figure>
     )
 }
