@@ -9,7 +9,7 @@ import InfoComponent from "./components/InfoComponent";
 import Navbar from "./components/Navbar";
 import { LikeProvider } from "./context/likeContext";
 
-//TODO: clear favorites, delete photo
+//TODO: save local storage 
 
 function App() {
   return (

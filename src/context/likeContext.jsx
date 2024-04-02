@@ -9,9 +9,9 @@ export const LikeProvider = ({ children }) => {
     setLikedPhotos((prevLikedPhotos) => [...prevLikedPhotos, photo]);
   };
 
-  const removeLikedPhoto = (photoId) => {
+  const removeLikedPhoto = (photoUrl) => {
     setLikedPhotos((prevLikedPhotos) =>
-      prevLikedPhotos.filter((photo) => photo.id !== photoId)
+      prevLikedPhotos.filter((photo) => photo.url !== photoUrl)
     );
   };
 

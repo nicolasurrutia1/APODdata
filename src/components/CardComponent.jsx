@@ -32,12 +32,12 @@ const CardComponent = ({ data, index }) => {
         >
           Info
         </NavLink>
-        <NavLink
+        <button
           onClick={() => handleLike()}
           className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded w-28"
         >
           Like
-        </NavLink>
+        </button>
       </div>
       {showEffect && <LikeEffectComponent />}
     </div>
