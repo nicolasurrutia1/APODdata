@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -9,18 +9,20 @@ const Navbar = () => {
           <h2 className="text-white text-2xl font-bold">APOD</h2>
         </div>
         <div className="flex space-x-4">
-          <Link
+          <NavLink            
             to="/"
             className="text-xl text-white hover:text-gray-300 transition duration-300"
+            exact activeClassName="active"
           >
             Discover
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/favorites"
             className="text-xl text-white hover:text-gray-300 transition duration-300"
+            exact activeClassName="active"
           >
             Favorites
-          </Link>
+          </NavLink>
         </div>
       </nav>
     </header>

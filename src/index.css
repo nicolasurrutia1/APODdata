@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer components {
-  .default {
-    @apply transition-transform ease-in-out rotate-180;
+@layer components {
+  .active {
+    @apply underline;
   }
-} */
+}

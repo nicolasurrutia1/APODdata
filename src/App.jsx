@@ -9,7 +9,7 @@ import InfoComponent from "./components/InfoComponent";
 import Navbar from "./components/Navbar";
 import { LikeProvider } from "./context/likeContext";
 
-//TODO: save local storage 
+//TODO: save local storage, hacer un boton copy que copie link
 
 function App() {
   return (
