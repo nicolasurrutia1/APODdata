@@ -1,4 +1,4 @@
-import { useDataContext } from "../context/dataContext";
+import { useDataContext } from "../context/useDataContext";
 import GalleryItem from "./GalleryItem";
 
 const GalleryGrid = () => {

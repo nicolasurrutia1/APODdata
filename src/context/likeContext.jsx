@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from "react";
-
-const LikeContext = createContext();
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { LikeContext } from "./LikeContext";
 
 export const LikeProvider = ({ children }) => {
   const [likedPhotos, setLikedPhotos] = useState([]);
@@ -28,6 +28,6 @@ export const LikeProvider = ({ children }) => {
   );
 };
 
-export const useLikeContext = ()=>{
-    return useContext(LikeContext)
-}
+LikeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

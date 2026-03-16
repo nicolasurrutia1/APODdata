@@ -1,5 +1,6 @@
+import PropTypes from "prop-types";
 import Photo from "./Photo";
-import { useLikeContext } from "../context/likeContext";
+import { useLikeContext } from "../context/useLikeContext";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -42,6 +43,16 @@ const CardComponent = ({ data, index }) => {
       {showEffect && <LikeEffectComponent />}
     </div>
   );
+};
+
+CardComponent.propTypes = {
+  data: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    thumbnail_url: PropTypes.string,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default CardComponent;

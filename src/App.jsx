@@ -1,4 +1,3 @@
-import { useState, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import reactLogo from "./assets/react.svg";
 
@@ -7,7 +6,7 @@ import GaleryComponent from "./components/GaleryComponent";
 import LikeComponent from "./components/LikeComponent";
 import InfoComponent from "./components/InfoComponent";
 import Navbar from "./components/Navbar";
-import { LikeProvider } from "./context/likeContext";
+import { LikeProvider } from "./context/likeContext.jsx";
 
 //TODO: save local storage, hacer un boton copy que copie link
 

@@ -1,6 +1,6 @@
 import Photo from "./Photo";
 import { memo } from "react";
-import { useLikeContext } from "../context/likeContext";
+import { useLikeContext } from "../context/useLikeContext";
 const LikeComponent = () => {
   const { likedPhotos, removeLikedPhoto, clearLikedPhotos } = useLikeContext();
   const uniqueLikedPhotos = likedPhotos.filter((photo, index) => {

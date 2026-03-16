@@ -1,11 +1,7 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import { useFetch } from "../customHooks/useFetch";
-
-const DataContext = createContext();
-
-export const useDataContext = () => {
-  return useContext(DataContext);
-};
+import { DataContext } from "./DataContext";
 
 const baseURL = "https://api.nasa.gov/planetary/apod";
 const apiKey = import.meta.env.VITE_API_KEY;
@@ -24,4 +20,8 @@ export const DataProvider = ({ children }) => {
       {children}
     </DataContext.Provider>
   );
+};
+
+DataProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

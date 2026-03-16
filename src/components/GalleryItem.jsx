@@ -1,17 +1,25 @@
-import { useDataContext } from "../context/dataContext";
+import PropTypes from "prop-types";
+import { useDataContext } from "../context/useDataContext";
 import CardComponent from "./CardComponent";
 
 const GalleryItem = ({ index }) => {
   const { data } = useDataContext();
-  const item = data[index];
+  const item = data && data[index];
+  if (!item) {
+    return null;
+  }
   return (
     <>
       <CardComponent
         data={item}
-        index={index}      
+        index={index}
       />
     </>
   );
 };
 
-export default GalleryItem
+GalleryItem.propTypes = {
+  index: PropTypes.number.isRequired,
+};
+
+export default GalleryItem;

@@ -1,4 +1,6 @@
-const Photo = ({src, alt, thumb})=>{
+import PropTypes from "prop-types";
+
+const Photo = ({ src, alt, thumb }) => {
     let source = src
     if(thumb !==undefined){
         source = thumb
@@ -9,4 +11,10 @@ const Photo = ({src, alt, thumb})=>{
         </figure>
     )
 }
-export default Photo
+Photo.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  thumb: PropTypes.string,
+};
+
+export default Photo;

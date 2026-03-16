@@ -19,6 +19,6 @@ export function useFetch(url, dependencies) {
             }
         }
         fetchData();
-    }, [dependencies])
+    }, [url, dependencies])
     return {data, loading, error}
 }

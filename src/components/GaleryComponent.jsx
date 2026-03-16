@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from "react";
-import { useDataContext } from "../context/dataContext";
+import { useDataContext } from "../context/useDataContext";
 import GalleryGrid from "./GalleryGrid";
 import LoadingComponent from "./LoadingComponent";
 
