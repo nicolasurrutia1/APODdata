@@ -24,6 +24,8 @@ export function useFetch(url, options = {}) {
 
         setError(null);
 
+        let aborted = false;
+
         try {
             const response = await fetch(url, { signal: abortControllerRef.current.signal });
             if (!response.ok) {
@@ -33,16 +35,20 @@ export function useFetch(url, options = {}) {
             setData(newData);
             return { data: newData, success: true };
         } catch (error) {
-            if (error.name !== 'AbortError') {
-                setError(error);
-                if (retryOnError && isRefetch) {
-                    console.warn('Retrying...', error.message);
-                }
+            if (error.name === "AbortError") {
+                aborted = true;
+                return { data: null, success: false, aborted: true };
             }
-            return { data: null, success: false, error: error }
+            setError(error);
+            if (retryOnError && isRefetch) {
+                console.warn("Retrying...", error.message);
+            }
+            return { data: null, success: false, error };
         } finally {
-            if (isRefetch) setIsRefetching(false);
-            else setLoading(false);
+            if (!aborted) {
+                if (isRefetch) setIsRefetching(false);
+                else setLoading(false);
+            }
         }
     }, [url, retryOnError])
 

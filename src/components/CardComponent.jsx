@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Photo from "./Photo";
-import { useLikeContext } from "../context/useLikeContext";
+import { useLikeContext } from "../context/like/useLikeContext";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const CardComponent = ({ data, index }) => {
       setShowEffect(false);
     }, 1500);
   };
-  
+
   return (
     <div
       key={index}
@@ -25,10 +25,10 @@ const CardComponent = ({ data, index }) => {
     >
       <Photo src={data.url} alt={data.title} thumb={data.thumbnail_url} />
       <h3 className="text-xl font-bold mb-2">{data.title}</h3>
-      <p className="text-sm text-gray-500">{data.date}</p>      
+      <p className="text-sm text-gray-500">{data.date}</p>
       <div className="mt-10 flex justify-end">
         <NavLink
-          to={`/info/${index}`}          
+          to={`/info/${index}`}
           className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mr-5 rounded w-28"
         >
           Info

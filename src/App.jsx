@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import reactLogo from "./assets/react.svg";
 
 import "./App.css";
-import GaleryComponent from "./components/GaleryComponent";
-import LikeComponent from "./components/LikeComponent";
-import InfoComponent from "./components/InfoComponent";
+import GalleryPage from "./pages/GalleryPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import InfoPage from "./pages/InfoPage";
 import Navbar from "./components/Navbar";
-import { LikeProvider } from "./context/likeContext.jsx";
+import { LikeProvider } from "./context/like/LikeProvider.jsx";
 
 //TODO: save local storage, hacer un boton copy que copie link
 
@@ -20,9 +20,9 @@ function App() {
             Astronomy Picture of the Day
           </h1>
           <Routes>
-            <Route path="/" element={<GaleryComponent />} />
-            <Route path="/favorites" element={<LikeComponent />} />
-            <Route path="/info/:index" element={<InfoComponent />} />
+            <Route path="/" element={<GalleryPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/info/:index" element={<InfoPage />} />
           </Routes>
         </main>
       </BrowserRouter>

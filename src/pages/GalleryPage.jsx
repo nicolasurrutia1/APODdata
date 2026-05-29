@@ -1,15 +1,15 @@
-import { useDataContext } from "../context/useDataContext";
-import GalleryGrid from "./GalleryGrid";
-import LoadingComponent from "./LoadingComponent";
+import { useDataContext } from "../context/data/useDataContext";
+import GalleryGrid from "../components/GalleryGrid";
+import LoadingComponent from "../components/LoadingComponent";
 
-const GaleryComponent = () => {
-  const { loading, error, reloadData, isRefetching } = useDataContext();
+const GalleryPage = () => {
+  const { data, loading, error, reloadData, isRefetching } = useDataContext();
 
   const handleReloadData = () => {
     reloadData();
   };
 
-  if (loading) {
+  if (loading || !data) {
     return <LoadingComponent />;
   }
   if (error) {
@@ -39,4 +39,4 @@ const GaleryComponent = () => {
     </section>
   );
 };
-export default GaleryComponent;
+export default GalleryPage;

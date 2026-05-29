@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import { useFetch } from "../customHooks/useFetch";
+import { useFetch } from "../../customHooks/useFetch";
 import { DataContext } from "./DataContext";
 
 const baseURL = "https://api.nasa.gov/planetary/apod";

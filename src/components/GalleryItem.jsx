@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useDataContext } from "../context/useDataContext";
+import { useDataContext } from "../context/data/useDataContext";
 import CardComponent from "./CardComponent";
 
 const GalleryItem = ({ index }) => {
@@ -10,10 +10,7 @@ const GalleryItem = ({ index }) => {
   }
   return (
     <>
-      <CardComponent
-        data={item}
-        index={index}
-      />
+      <CardComponent data={item} index={index} />
     </>
   );
 };

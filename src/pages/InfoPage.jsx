@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useDataContext } from "../context/useDataContext";
+import { useDataContext } from "../context/data/useDataContext";
 
-const InfoComponent = () => {
+const InfoPage = () => {
   const indexNum = parseInt(useParams().index, 10);
   const { data } = useDataContext();
 
@@ -31,19 +31,13 @@ const InfoComponent = () => {
   return (
     <div className="flex text-left  p-3 flex-col md:flex-row">
       <div className="sm:w-full md:w-1/2 ">
-        <img
-          src={source}
-          alt={item.title}
-          className="h-full w-full "
-        />
+        <img src={source} alt={item.title} className="h-full w-full " />
       </div>
       <div className="sm:w-full md:w-1/2 md:px-2 lg:px-5 ml-5 ">
         <h3 className="text-xl font-bold mb-5">{item.title}</h3>
         <p className="text-base text-black mb-2">{item.date}</p>
         <p className="text-base text-black mb-5">{item.copyright}</p>
-        <p className="text-base text-black mb-10 w-4/5">
-          {item.explanation}
-        </p>
+        <p className="text-base text-black mb-10 w-4/5">{item.explanation}</p>
         <div className="flex justify-center">
           <NavLink
             to={`/`}
@@ -57,4 +51,4 @@ const InfoComponent = () => {
   );
 };
 
-export default InfoComponent;
+export default InfoPage;

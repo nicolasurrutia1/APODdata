@@ -1,7 +1,8 @@
-import Photo from "./Photo";
+import Photo from "../components/Photo";
 import { memo } from "react";
-import { useLikeContext } from "../context/useLikeContext";
-const LikeComponent = () => {
+import { useLikeContext } from "../context/like/useLikeContext";
+
+const FavoritesPage = () => {
   const { likedPhotos, removeLikedPhoto, clearLikedPhotos } = useLikeContext();
   const uniqueLikedPhotos = likedPhotos.filter((photo, index) => {
     return likedPhotos.findIndex((p) => p.url === photo.url) === index;
@@ -57,4 +58,4 @@ const LikeComponent = () => {
   );
 };
 
-export default memo(LikeComponent);
+export default memo(FavoritesPage);

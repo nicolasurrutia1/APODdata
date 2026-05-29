@@ -11,7 +11,7 @@ export const LikeProvider = ({ children }) => {
 
   const removeLikedPhoto = (photoUrl) => {
     setLikedPhotos((prevLikedPhotos) =>
-      prevLikedPhotos.filter((photo) => photo.url !== photoUrl)
+      prevLikedPhotos.filter((photo) => photo.url !== photoUrl),
     );
   };
 
