@@ -3,14 +3,18 @@ import PropTypes from "prop-types";
 import { useFetch } from "../../customHooks/useFetch";
 import { DataContext } from "./DataContext";
 
-const baseURL = "https://api.nasa.gov/planetary/apod";
-const apiKey = import.meta.env.VITE_API_KEY;
-const countData = "9";
-const thumb = "True";
+const apodParams = {
+  api_key: import.meta.env.VITE_API_KEY,
+  count: "9",
+  thumbs: "True",
+}
 
 export const DataProvider = ({ children }) => {
   const { data, loading, error, refetch, isRefetching, setData } = useFetch(
-    `${baseURL}?api_key=${apiKey}&count=${countData}&thumbs=${thumb}`,
+    "",
+    {
+      params: apodParams,
+    },
   );
 
   const reloadData = useCallback(() => {

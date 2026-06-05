@@ -1,13 +1,14 @@
 import { useEffect, useState, useCallback, useRef } from "react";
+import axios from "axios";
+import { nasaClient } from "../api/axiosClient";
 
 export function useFetch(url, options = {}) {
     const {
-        inmediate = true,
-        retryOnError = false,
+        immediate = true,
     } = options;
 
     const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(inmediate)
+    const [loading, setLoading] = useState(immediate)
     const [error, setError] = useState(null)
     const [isRefetching, setIsRefetching] = useState(false)
 
@@ -24,36 +25,27 @@ export function useFetch(url, options = {}) {
 
         setError(null);
 
-        let aborted = false;
-
         try {
-            const response = await fetch(url, { signal: abortControllerRef.current.signal });
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const newData = await response.json();
+            const response = await nasaClient.get(url, {
+                signal: abortControllerRef.current.signal,
+                params: options.params,
+            });
+            const newData = response.data;
             setData(newData);
-            return { data: newData, success: true };
         } catch (error) {
-            if (error.name === "AbortError") {
-                aborted = true;
-                return { data: null, success: false, aborted: true };
+            const message = error.response ? `NASA API respondió ${error.response.status}` : error.message;
+            if (axios.isCancel(error)) {
+                return;
             }
-            setError(error);
-            if (retryOnError && isRefetch) {
-                console.warn("Retrying...", error.message);
-            }
-            return { data: null, success: false, error };
+            setError(message);
         } finally {
-            if (!aborted) {
-                if (isRefetch) setIsRefetching(false);
-                else setLoading(false);
-            }
+            if (isRefetch) setIsRefetching(false);
+            else setLoading(false);
         }
-    }, [url, retryOnError])
+    }, [url, options.params])
 
     useEffect(() => {
-        if (inmediate) {
+        if (immediate) {
             executeFetch();
         }
 
@@ -62,7 +54,7 @@ export function useFetch(url, options = {}) {
                 abortControllerRef.current.abort();
             }
         };
-    }, [executeFetch, inmediate])
+    }, [executeFetch, immediate])
 
     const refetch = useCallback(() => executeFetch(true), [executeFetch])
 
