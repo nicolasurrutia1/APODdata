@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useDataContext } from "../context/data/useDataContext";
+import { useApodStore } from "../stores/useApodStore";
 
 const InfoPage = () => {
   const indexNum = parseInt(useParams().index, 10);
-  const { data } = useDataContext();
+  const { data } = useApodStore();
 
   if (!data || data.length === 0) {
     return <div className="p-5 text-center">Loading...</div>;

@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import Photo from "./Photo";
-import { useLikeContext } from "../context/like/useLikeContext";
+import { useLikeStore } from "../stores/useLikeStore";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import LikeEffectComponent from "./LikeEffectComponent";
 
 const CardComponent = ({ data, index }) => {
-  const { addLikedPhoto } = useLikeContext();
+  const { addLikedPhoto } = useLikeStore();
   const [showEffect, setShowEffect] = useState(false);
 
   const handleLike = () => {

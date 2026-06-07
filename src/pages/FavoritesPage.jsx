@@ -1,9 +1,9 @@
 import Photo from "../components/Photo";
 import { memo } from "react";
-import { useLikeContext } from "../context/like/useLikeContext";
+import { useLikeStore } from "../stores/useLikeStore";
 
 const FavoritesPage = () => {
-  const { likedPhotos, removeLikedPhoto, clearLikedPhotos } = useLikeContext();
+  const { likedPhotos, removeLikedPhoto, clearLikedPhotos } = useLikeStore();
   const uniqueLikedPhotos = likedPhotos.filter((photo, index) => {
     return likedPhotos.findIndex((p) => p.url === photo.url) === index;
   });

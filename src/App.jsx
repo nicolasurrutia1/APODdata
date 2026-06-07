@@ -6,27 +6,24 @@ import GalleryPage from "./pages/GalleryPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import InfoPage from "./pages/InfoPage";
 import Navbar from "./components/Navbar";
-import { LikeProvider } from "./context/like/LikeProvider.jsx";
 
 //TODO: save local storage, hacer un boton copy que copie link
 
 function App() {
   return (
-    <LikeProvider>
-      <BrowserRouter>
-        <Navbar />
-        <main className="container mx-auto my-20">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10">
-            Astronomy Picture of the Day
-          </h1>
-          <Routes>
-            <Route path="/" element={<GalleryPage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="/info/:index" element={<InfoPage />} />
-          </Routes>
-        </main>
-      </BrowserRouter>
-    </LikeProvider>
+    <BrowserRouter>
+      <Navbar />
+      <main className="container mx-auto my-20">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10">
+          Astronomy Picture of the Day
+        </h1>
+        <Routes>
+          <Route path="/" element={<GalleryPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/info/:index" element={<InfoPage />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 

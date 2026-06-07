@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { useDataContext } from "../context/data/useDataContext";
+import { useApodStore } from "../stores/useApodStore";
 import CardComponent from "./CardComponent";
 
 const GalleryItem = ({ index }) => {
-  const { data } = useDataContext();
+  const { data } = useApodStore();
   const item = data && data[index];
   if (!item) {
     return null;
