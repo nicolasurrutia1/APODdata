@@ -1,22 +1,51 @@
 import { NavLink } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useApodStore } from "../stores/useApodStore";
+import { useLikeStore } from "../stores/useLikeStore";
 
 const InfoPage = () => {
   const indexNum = parseInt(useParams().index, 10);
-  const { data } = useApodStore();
+  const location = useLocation();
+  const isFavorites = location.pathname.startsWith("/favorites/info");
 
-  if (!data || data.length === 0) {
+  const { data } = useApodStore();
+  const { likedPhotos } = useLikeStore();
+
+  let item;
+  let backTo;
+
+  if (isFavorites) {
+    const uniqueLikedPhotos = likedPhotos.filter(
+      (photo, i) => likedPhotos.findIndex((p) => p.url === photo.url) === i
+    );
+    item = uniqueLikedPhotos[indexNum];
+    backTo = "/favorites";
+  } else {
+    item = data?.[indexNum];
+    backTo = "/";
+  }
+
+  if (!isFavorites && (!data || data.length === 0)) {
     return <div className="p-5 text-center">Loading...</div>;
   }
 
-  const item = data[indexNum];
+  if (isFavorites && likedPhotos.length === 0) {
+    return (
+      <div className="p-5 text-center">
+        <p className="text-xl font-semibold mb-4">No favorites saved.</p>
+        <NavLink to="/favorites" className="text-blue-900 underline">
+          Back to favorites
+        </NavLink>
+      </div>
+    );
+  }
+
   if (!item) {
     return (
       <div className="p-5 text-center">
         <p className="text-xl font-semibold mb-4">Photo not found.</p>
-        <NavLink to="/" className="text-blue-900 underline">
-          Back to gallery
+        <NavLink to={backTo} className="text-blue-900 underline">
+          {isFavorites ? "Back to favorites" : "Back to gallery"}
         </NavLink>
       </div>
     );
@@ -40,7 +69,7 @@ const InfoPage = () => {
         <p className="text-base text-black mb-10 w-4/5">{item.explanation}</p>
         <div className="flex justify-center">
           <NavLink
-            to={`/`}
+            to={backTo}
             className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3  rounded w-28 text-center"
           >
             Back

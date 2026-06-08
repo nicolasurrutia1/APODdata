@@ -21,6 +21,7 @@ function App() {
           <Route path="/" element={<GalleryPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/info/:index" element={<InfoPage />} />
+          <Route path="/favorites/info/:index" element={<InfoPage />} />
         </Routes>
       </main>
     </BrowserRouter>

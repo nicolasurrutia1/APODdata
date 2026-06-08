@@ -1,6 +1,7 @@
 import Photo from "../components/Photo";
 import { memo } from "react";
 import { useLikeStore } from "../stores/useLikeStore";
+import { NavLink } from "react-router-dom";
 
 const FavoritesPage = () => {
   const { likedPhotos, removeLikedPhoto, clearLikedPhotos } = useLikeStore();
@@ -44,6 +45,12 @@ const FavoritesPage = () => {
             />
             <h2 className="text-lg font-bold mb-3">{likedPhoto.title}</h2>
             <div className="mt-5 flex justify-end">
+              <NavLink
+                to={`/favorites/info/${index}`}
+                className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mr-5 rounded w-28"
+              >
+                Info
+              </NavLink>
               <button
                 onClick={() => handleDelete(likedPhoto.url)}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded w-28"
