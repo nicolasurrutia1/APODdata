@@ -16,7 +16,7 @@ const InfoPage = () => {
 
   if (isFavorites) {
     const uniqueLikedPhotos = likedPhotos.filter(
-      (photo, i) => likedPhotos.findIndex((p) => p.url === photo.url) === i
+      (photo, i) => likedPhotos.findIndex((p) => p.url === photo.url) === i,
     );
     item = uniqueLikedPhotos[indexNum];
     backTo = "/favorites";
