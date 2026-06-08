@@ -7,7 +7,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import InfoPage from "./pages/InfoPage";
 import Navbar from "./components/Navbar";
 
-//TODO: save local storage, hacer un boton copy que copie link
+//TODO: hacer un boton copy que copie link de la imagen
 
 function App() {
   return (

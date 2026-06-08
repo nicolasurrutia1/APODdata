@@ -7,15 +7,25 @@ import { NavLink } from "react-router-dom";
 import LikeEffectComponent from "./LikeEffectComponent";
 
 const CardComponent = ({ data, index }) => {
-  const { addLikedPhoto } = useLikeStore();
+  const { addLikedPhoto, likedPhotos, removeLikedPhoto } = useLikeStore();
   const [showEffect, setShowEffect] = useState(false);
+  const isLiked = likedPhotos.some((p) => p.url === data.url);
+  const [effectMessage, setEffectMessage] = useState("");
+  const [effectVariant, setEffectVariant] = useState("like");
 
-  const handleLike = () => {
-    addLikedPhoto(data);
+  const handleToggleLike = () => {
+    if (isLiked) {
+      removeLikedPhoto(data.url);
+      setEffectMessage("Photo removed from your favorites");
+      setEffectVariant("unlike");
+    } else {
+      addLikedPhoto(data);
+      setEffectMessage("Photo added to your favorites");
+      setEffectVariant("like");
+    }
+
     setShowEffect(true);
-    setTimeout(() => {
-      setShowEffect(false);
-    }, 1500);
+    setTimeout(() => setShowEffect(false), 1500);
   };
 
   return (
@@ -34,13 +44,15 @@ const CardComponent = ({ data, index }) => {
           Info
         </NavLink>
         <button
-          onClick={() => handleLike()}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded w-28"
+          onClick={handleToggleLike}
+          className={`text-white px-4 py-3 rounded w-28 ${isLiked ? "bg-gray-700 hover:bg-gray-800" : "bg-red-600 hover:bg-red-700"}`}
         >
-          Like
+          {isLiked ? "Unlike" : "Like"}
         </button>
       </div>
-      {showEffect && <LikeEffectComponent />}
+      {showEffect && (
+        <LikeEffectComponent message={effectMessage} variant={effectVariant} />
+      )}
     </div>
   );
 };

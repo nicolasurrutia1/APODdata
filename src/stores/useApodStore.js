@@ -29,7 +29,7 @@ export const useApodStore = create((set, get) => ({
             set({ data: response.data })
         } catch (err) {
             if (axios.isCancel(err)) return;
-            const message = err.response ? `NASA API responded with${err.response.status}` : err.message;
+            const message = err.response ? `NASA API responded with ${err.response.status}` : err.message;
             set({ error: message })
         } finally {
             set(isRefetching ? { isRefetching: false } : { loading: false })
