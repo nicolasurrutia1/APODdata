@@ -12,6 +12,7 @@ Browse random space media, view detailed information, and save your favorite ite
 - React Router DOM 7
 - Zustand 5 (global state)
 - Axios (NASA API client)
+- Lucide React (icons)
 - PropTypes
 
 ### Build & Tooling
@@ -24,6 +25,7 @@ Browse random space media, view detailed information, and save your favorite ite
 
 - Tailwind CSS 4
 - `@tailwindcss/vite`
+- CSS theme tokens (dark space-inspired palette)
 - PostCSS
 - Autoprefixer
 
@@ -91,7 +93,7 @@ Browse random space media, view detailed information, and save your favorite ite
 
 | Route | Page | Description |
 | --- | --- | --- |
-| `/` | Gallery | Browse 9 random APOD items. Use **Explore** to fetch a new batch. |
+| `/` | Gallery | Browse 9 random APOD items. Use **Explore** in the page hero to fetch a new batch. |
 | `/favorites` | Favorites | View liked photos. Remove individual items or clear all. |
 | `/info/:index` | Details | Full info for a photo from the current gallery batch. |
 | `/favorites/info/:index` | Details | Full info for a photo from your favorites list. |
@@ -100,7 +102,7 @@ Browse random space media, view detailed information, and save your favorite ite
 
 - **Random gallery** — Fetches 9 random APOD entries on load and on demand.
 - **Like / Unlike** — Toggle favorites from any gallery card; duplicate URLs are ignored.
-- **Toast feedback** — A brief notification confirms when a photo is added or removed.
+- **Visual like feedback** — Saved state is shown on the card via badge, button label, and color.
 - **Persistent favorites** — Liked photos are saved to `localStorage` and survive page reloads.
 - **Video support** — Uses `thumbnail_url` when available (e.g. YouTube APOD entries).
 - **Request cancellation** — In-flight API requests are aborted when a new fetch starts.
@@ -116,23 +118,23 @@ src/
 │   └── axiosClient.js       # Pre-configured Axios instance for NASA APOD
 ├── components/
 │   ├── ApodInitializer.jsx  # Triggers initial APOD fetch on app mount
-│   ├── CardComponent.jsx    # Gallery card with Like/Info actions
+│   ├── CardComponent.jsx    # Shared card for gallery/favorites (Like or Delete)
 │   ├── GalleryGrid.jsx      # Responsive grid of gallery items
 │   ├── GalleryItem.jsx      # Resolves a single item from the APOD store
-│   ├── LikeEffectComponent.jsx  # Toast notification for like/unlike
 │   ├── LoadingComponent.jsx # Bouncing dots loading state
-│   ├── Navbar.jsx           # Fixed top navigation
+│   ├── Navbar.jsx           # Fixed top navigation with tab-style links
+│   ├── PageHero.jsx         # Page heading, description, Explore / Clear All actions
 │   └── Photo.jsx            # Image display (thumbnail fallback for videos)
 ├── pages/
-│   ├── GalleryPage.jsx      # Home — gallery + Explore button
-│   ├── FavoritesPage.jsx    # Liked photos grid
+│   ├── GalleryPage.jsx      # Home — gallery grid
+│   ├── FavoritesPage.jsx    # Liked photos grid via CardComponent
 │   └── InfoPage.jsx         # Detail view (gallery or favorites source)
 ├── stores/
 │   ├── useApodStore.js      # APOD data, loading, error, refetch
 │   └── useLikeStore.js      # Favorites with localStorage persistence
 ├── App.jsx                  # Router and layout
 ├── main.jsx                 # Entry point
-└── index.css                # Tailwind imports + active nav styles
+└── index.css                # Tailwind imports + theme tokens
 ```
 
 ### State Management (Zustand)
@@ -168,22 +170,24 @@ main.jsx
 └── ApodInitializer          # calls fetchApod() on mount
     └── App
         ├── Navbar
+        ├── PageHero         # hidden on /info routes
         └── Routes
             ├── GalleryPage
             │   └── GalleryGrid
             │       └── GalleryItem
-            │           └── CardComponent
-            │               ├── Photo
-            │               └── LikeEffectComponent
+            │           └── CardComponent (mode: discover)
+            │               └── Photo
             ├── FavoritesPage
-            │   └── Photo (per liked item)
+            │   └── CardComponent (mode: favorites)
+            │       └── Photo
             └── InfoPage
 ```
 
 ### Routing Notes
 
 - `InfoPage` detects its data source from the URL: gallery items use `useApodStore`, favorites use `useLikeStore`.
-- Active nav links use Tailwind's `.active` class (underline) via React Router's `NavLink`.
+- `CardComponent` accepts a `mode` prop: `"discover"` (Like) or `"favorites"` (Delete).
+- `PageHero` shows contextual headings and actions: **Explore** on `/`, **Clear All** on `/favorites` when items exist.
 - `FavoritesPage` is wrapped with `memo()` to reduce unnecessary re-renders.
 
 ## Data Source
