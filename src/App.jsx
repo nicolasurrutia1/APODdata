@@ -1,29 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import reactLogo from "./assets/react.svg";
 
 import "./App.css";
 import GalleryPage from "./pages/GalleryPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import InfoPage from "./pages/InfoPage";
 import Navbar from "./components/Navbar";
-
-//TODO: hacer un boton copy que copie link de la imagen
+import PageHero from "./components/PageHero";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <main className="container mx-auto my-20">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10">
-          Astronomy Picture of the Day
-        </h1>
-        <Routes>
-          <Route path="/" element={<GalleryPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/info/:index" element={<InfoPage />} />
-          <Route path="/favorites/info/:index" element={<InfoPage />} />
-        </Routes>
-      </main>
+      <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <Navbar />
+        <div className="pt-16 flex flex-col flex-1">
+          <PageHero />
+          <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 text-left">
+            <Routes>
+              <Route path="/" element={<GalleryPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/info/:index" element={<InfoPage />} />
+              <Route path="/favorites/info/:index" element={<InfoPage />} />
+            </Routes>
+          </main>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

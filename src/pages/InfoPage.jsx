@@ -26,14 +26,21 @@ const InfoPage = () => {
   }
 
   if (!isFavorites && (!data || data.length === 0)) {
-    return <div className="p-5 text-center">Loading...</div>;
+    return (
+      <div className="p-5 text-center text-muted-foreground">Loading...</div>
+    );
   }
 
   if (isFavorites && likedPhotos.length === 0) {
     return (
       <div className="p-5 text-center">
-        <p className="text-xl font-semibold mb-4">No favorites saved.</p>
-        <NavLink to="/favorites" className="text-blue-900 underline">
+        <p className="text-xl font-semibold mb-4 text-card-foreground">
+          No favorites saved.
+        </p>
+        <NavLink
+          to="/favorites"
+          className="text-primary hover:text-primary/80 underline"
+        >
           Back to favorites
         </NavLink>
       </div>
@@ -43,8 +50,13 @@ const InfoPage = () => {
   if (!item) {
     return (
       <div className="p-5 text-center">
-        <p className="text-xl font-semibold mb-4">Photo not found.</p>
-        <NavLink to={backTo} className="text-blue-900 underline">
+        <p className="text-xl font-semibold mb-4 text-card-foreground">
+          Photo not found.
+        </p>
+        <NavLink
+          to={backTo}
+          className="text-primary hover:text-primary/80 underline"
+        >
           {isFavorites ? "Back to favorites" : "Back to gallery"}
         </NavLink>
       </div>
@@ -63,14 +75,22 @@ const InfoPage = () => {
         <img src={source} alt={item.title} className="h-full w-full " />
       </div>
       <div className="sm:w-full md:w-1/2 md:px-2 lg:px-5 ml-5 ">
-        <h3 className="text-xl font-bold mb-5">{item.title}</h3>
-        <p className="text-base text-black mb-2">{item.date}</p>
-        <p className="text-base text-black mb-5">{item.copyright}</p>
-        <p className="text-base text-black mb-10 w-4/5">{item.explanation}</p>
+        <h3 className="text-xl font-bold mb-5 text-card-foreground">
+          {item.title}
+        </h3>
+        <p className="text-base text-muted-foreground mb-2">{item.date}</p>
+        {item.copyright && (
+          <p className="text-base text-muted-foreground mb-5">
+            © {item.copyright}
+          </p>
+        )}
+        <p className="text-base text-card-foreground leading-relaxed mb-10 w-4/5">
+          {item.explanation}
+        </p>
         <div className="flex justify-center">
           <NavLink
             to={backTo}
-            className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3  rounded w-28 text-center"
+            className="bg-primary hover:bg-primary/80 text-primary-foreground px-4 py-3 rounded-lg w-28 text-center transition-colors"
           >
             Back
           </NavLink>

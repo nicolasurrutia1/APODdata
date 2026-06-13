@@ -40,6 +40,12 @@
   --radius-2xl: calc(var(--radius) + 8px);
 }
 
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 @layer components {
   .active {
     @apply underline;

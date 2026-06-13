@@ -1,9 +1,10 @@
+import { Compass } from "lucide-react";
 import { useApodStore } from "../stores/useApodStore";
 import GalleryGrid from "../components/GalleryGrid";
 import LoadingComponent from "../components/LoadingComponent";
 
 const GalleryPage = () => {
-  const { data, loading, error, reloadData, isRefetching } = useApodStore();
+  const { data, loading, error, reloadData } = useApodStore();
 
   const handleReloadData = () => {
     reloadData();
@@ -12,31 +13,31 @@ const GalleryPage = () => {
   if (loading || !data) {
     return <LoadingComponent />;
   }
+
   if (error) {
     return (
-      <div>
-        <h2>Something went wrong! Please try again.</h2>
-        <p>{error}</p>
+      <div className="text-center">
+        <h2 className="text-card-foreground text-xl font-medium mb-2">
+          Something went wrong! Please try again.
+        </h2>
+        <p className="text-muted-foreground mb-6">{error}</p>
         <button
+          type="button"
           onClick={handleReloadData}
-          className="bg-blue-900 hover:bg-blue-950 text-white font-semibold px-4 py-3 mr-5 rounded w-28 mb-10"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/80 transition-colors text-[0.85rem]"
         >
+          <Compass className="w-3.5 h-3.5" />
           Retry
         </button>
       </div>
     );
   }
+
   return (
     <section>
-      <button
-        onClick={handleReloadData}
-        disabled={isRefetching}
-        className={`bg-blue-900 hover:bg-blue-950 text-white font-semibold px-4 py-3 mr-5 rounded w-28 mb-10 ${isRefetching ? "opacity-50 cursor-not-allowed" : ""}`}
-      >
-        {isRefetching ? "Refreshing..." : "Explore"}
-      </button>
       <GalleryGrid />
     </section>
   );
 };
+
 export default GalleryPage;
