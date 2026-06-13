@@ -1,17 +1,13 @@
-import Photo from "../components/Photo";
 import { memo } from "react";
+import { Trash2 } from "lucide-react";
 import { useLikeStore } from "../stores/useLikeStore";
-import { NavLink } from "react-router-dom";
+import CardComponent from "../components/CardComponent";
 
 const FavoritesPage = () => {
-  const { likedPhotos, removeLikedPhoto, clearLikedPhotos } = useLikeStore();
+  const { likedPhotos, clearLikedPhotos } = useLikeStore();
   const uniqueLikedPhotos = likedPhotos.filter((photo, index) => {
     return likedPhotos.findIndex((p) => p.url === photo.url) === index;
   });
-
-  const handleDelete = (photoUrl) => {
-    removeLikedPhoto(photoUrl);
-  };
 
   const handleClear = () => {
     clearLikedPhotos();
@@ -20,45 +16,31 @@ const FavoritesPage = () => {
   if (uniqueLikedPhotos.length === 0) {
     return (
       <div className="mt-10">
-        <h3 className="text-xl">Save your pictures here</h3>
+        <h3 className="text-xl text-card-foreground">
+          Save your pictures here
+        </h3>
       </div>
     );
   }
+
   return (
     <section>
       <button
+        type="button"
         onClick={handleClear}
-        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-3 mr-5 rounded w-28 mb-10"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-destructive text-destructive-foreground hover:bg-destructive/80 transition-colors text-[0.8rem] mb-10"
       >
-        Clear
+        <Trash2 className="w-3.5 h-3.5" />
+        Clear All
       </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {uniqueLikedPhotos.map((likedPhoto, index) => (
-          <div
-            key={index}
-            className="bg-gray-200 p-4 rounded-lg flex flex-col h-auto relative"
-          >
-            <Photo
-              src={likedPhoto.url}
-              alt={likedPhoto.title}
-              thumb={likedPhoto.thumbnail_url}
-            />
-            <h2 className="text-lg font-bold mb-3">{likedPhoto.title}</h2>
-            <div className="mt-5 flex justify-end">
-              <NavLink
-                to={`/favorites/info/${index}`}
-                className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mr-5 rounded w-28"
-              >
-                Info
-              </NavLink>
-              <button
-                onClick={() => handleDelete(likedPhoto.url)}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded w-28"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
+          <CardComponent
+            key={likedPhoto.url}
+            data={likedPhoto}
+            index={index}
+            mode="favorites"
+          />
         ))}
       </div>
     </section>

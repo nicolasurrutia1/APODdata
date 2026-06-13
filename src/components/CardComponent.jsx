@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
-import { Info, Heart } from "lucide-react";
+import { Info, Heart, Trash2 } from "lucide-react";
 import Photo from "./Photo";
 import { useLikeStore } from "../stores/useLikeStore";
 import { NavLink } from "react-router-dom";
 
-const CardComponent = ({ data, index }) => {
+const CardComponent = ({ data, index, mode = "discover" }) => {
   const { addLikedPhoto, likedPhotos, removeLikedPhoto } = useLikeStore();
   const isLiked = likedPhotos.some((p) => p.url === data.url);
+  const isFavoritesMode = mode === "favorites";
 
   const handleToggleLike = () => {
     if (isLiked) {
@@ -15,6 +16,14 @@ const CardComponent = ({ data, index }) => {
       addLikedPhoto(data);
     }
   };
+
+  const handleDelete = () => {
+    removeLikedPhoto(data.url);
+  };
+
+  const infoPath = isFavoritesMode
+    ? `/favorites/info/${index}`
+    : `/info/${index}`;
 
   return (
     <div
@@ -28,7 +37,7 @@ const CardComponent = ({ data, index }) => {
           thumb={data.thumbnail_url}
           fill
         />
-        {isLiked && (
+        {!isFavoritesMode && isLiked && (
           <div className="absolute top-3 right-3 bg-accent text-accent-foreground rounded-full p-1.5">
             <Heart className="w-3.5 h-3.5 fill-current" />
           </div>
@@ -46,24 +55,35 @@ const CardComponent = ({ data, index }) => {
       )}
       <div className="mt-auto flex gap-2 pt-3 px-4 pb-4 border-t border-border">
         <NavLink
-          to={`/info/${index}`}
+          to={infoPath}
           className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors text-[0.8rem]"
         >
           <Info className="w-3.5 h-3.5" />
           Info
         </NavLink>
-        <button
-          type="button"
-          onClick={handleToggleLike}
-          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg transition-colors text-[0.8rem] ${
-            isLiked
-              ? "bg-accent text-accent-foreground hover:bg-accent/80"
-              : "bg-primary text-primary-foreground hover:bg-primary/80"
-          }`}
-        >
-          <Heart className={`w-3.5 h-3.5 ${isLiked ? "fill-current" : ""}`} />
-          {isLiked ? "Saved" : "Like"}
-        </button>
+        {isFavoritesMode ? (
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-destructive text-destructive-foreground hover:bg-destructive/80 transition-colors text-[0.8rem]"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            Delete
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleToggleLike}
+            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg transition-colors text-[0.8rem] ${
+              isLiked
+                ? "bg-accent text-accent-foreground hover:bg-accent/80"
+                : "bg-primary text-primary-foreground hover:bg-primary/80"
+            }`}
+          >
+            <Heart className={`w-3.5 h-3.5 ${isLiked ? "fill-current" : ""}`} />
+            {isLiked ? "Saved" : "Like"}
+          </button>
+        )}
       </div>
     </div>
   );
@@ -78,6 +98,7 @@ CardComponent.propTypes = {
     copyright: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
+  mode: PropTypes.oneOf(["discover", "favorites"]),
 };
 
 export default CardComponent;
