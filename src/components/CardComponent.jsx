@@ -1,58 +1,70 @@
 import PropTypes from "prop-types";
+import { Info, Heart } from "lucide-react";
 import Photo from "./Photo";
 import { useLikeStore } from "../stores/useLikeStore";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
-
-import LikeEffectComponent from "./LikeEffectComponent";
 
 const CardComponent = ({ data, index }) => {
   const { addLikedPhoto, likedPhotos, removeLikedPhoto } = useLikeStore();
-  const [showEffect, setShowEffect] = useState(false);
   const isLiked = likedPhotos.some((p) => p.url === data.url);
-  const [effectMessage, setEffectMessage] = useState("");
-  const [effectVariant, setEffectVariant] = useState("like");
 
   const handleToggleLike = () => {
     if (isLiked) {
       removeLikedPhoto(data.url);
-      setEffectMessage("Photo removed from your favorites");
-      setEffectVariant("unlike");
     } else {
       addLikedPhoto(data);
-      setEffectMessage("Photo added to your favorites");
-      setEffectVariant("like");
     }
-
-    setShowEffect(true);
-    setTimeout(() => setShowEffect(false), 1500);
   };
 
   return (
     <div
       key={index}
-      className={`bg-gray-200 p-4 rounded-lg flex flex-col h-full max-h-[500px] justify-around`}
+      className="group relative flex flex-col bg-card border border-border rounded-xl overflow-hidden transition-all duration-300 hover:border-primary/40 hover:shadow-2xl hover:shadow-black/60 hover:-translate-y-0.5 h-full"
     >
-      <Photo src={data.url} alt={data.title} thumb={data.thumbnail_url} />
-      <h3 className="text-xl font-bold mb-2">{data.title}</h3>
-      <p className="text-sm text-gray-500">{data.date}</p>
-      <div className="mt-10 flex justify-end">
+      <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-muted [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105">
+        <Photo
+          src={data.url}
+          alt={data.title}
+          thumb={data.thumbnail_url}
+          fill
+        />
+        {isLiked && (
+          <div className="absolute top-3 right-3 bg-accent text-accent-foreground rounded-full p-1.5">
+            <Heart className="w-3.5 h-3.5 fill-current" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      </div>
+      <h3 className="text-card-foreground leading-snug line-clamp-2 mb-1 px-4 pt-4">
+        {data.title}
+      </h3>
+      <p className="text-muted-foreground text-[0.75rem] px-4">{data.date}</p>
+      {data.copyright && (
+        <p className="text-muted-foreground text-[0.7rem] mt-0.5 px-4">
+          © {data.copyright}
+        </p>
+      )}
+      <div className="mt-auto flex gap-2 pt-3 px-4 pb-4 border-t border-border">
         <NavLink
           to={`/info/${index}`}
-          className="bg-blue-900 hover:bg-blue-950 text-white px-4 py-3 mr-5 rounded w-28"
+          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors text-[0.8rem]"
         >
+          <Info className="w-3.5 h-3.5" />
           Info
         </NavLink>
         <button
+          type="button"
           onClick={handleToggleLike}
-          className={`text-white px-4 py-3 rounded w-28 ${isLiked ? "bg-gray-700 hover:bg-gray-800" : "bg-red-600 hover:bg-red-700"}`}
+          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg transition-colors text-[0.8rem] ${
+            isLiked
+              ? "bg-accent text-accent-foreground hover:bg-accent/80"
+              : "bg-primary text-primary-foreground hover:bg-primary/80"
+          }`}
         >
-          {isLiked ? "Unlike" : "Like"}
+          <Heart className={`w-3.5 h-3.5 ${isLiked ? "fill-current" : ""}`} />
+          {isLiked ? "Saved" : "Like"}
         </button>
       </div>
-      {showEffect && (
-        <LikeEffectComponent message={effectMessage} variant={effectVariant} />
-      )}
     </div>
   );
 };
@@ -63,6 +75,7 @@ CardComponent.propTypes = {
     title: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     thumbnail_url: PropTypes.string,
+    copyright: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
